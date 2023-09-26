@@ -28,8 +28,8 @@ MiddleWares
 # it is function  with three aurguments  (req,res,next)
 # have a capacity to control http request in node
 # two types of MiddleWares
-   1.Apllication Based MiddleWares ----wee can use it when we want to control enteir request (it happens before all http methods)
-   2.Router Based MiddleWare       ----we can use it when we want ro control some requests
+   1.Apllication Spesific MiddleWares ----wee can use it when we want to control enteir request (it happens before all http methods)
+   2.Router Spesific   MiddleWare       ----we can use it when we want to control some requests
 
 
 #   next()-to continue used inside middleware to continue node  exicution
@@ -40,9 +40,9 @@ MiddleWares
 MongoDB
 -------
 1.to see the databases
-   -show data
+   -show dbs
 2.to open a db 
-   - use (databaseName)
+   - use (databaseName)   
 3.to list collections
    - show collections
 4.to show the datas inside a collections
@@ -77,7 +77,7 @@ DataBase Server Intergration(mongodb node connection)
 mongoose - library used to integrate mongodb and Server
          -npm i mongoose
 
-connect()-method used to conncetion string
+connect()-method used to create connection string
 
 model() - method used to create model
 
@@ -88,3 +88,20 @@ steps
 1.import mongoose
 2.connection string creation
 3.model creation for collection (model name is singular form of collection name)
+
+
+
+asynchronus method handling in javascript
+-----------------------------------------
+
+promise  -- resolve - then()
+         -- reject  - catch()
+
+
+
+CORS(Cross Origin Resource Sharing)
+-----------------------------------
+# library used to integrate frontent with node
+4200 - 3000
+
+install cors

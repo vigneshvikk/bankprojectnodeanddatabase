@@ -4,6 +4,9 @@ const express =require("express")
 //import dataService
 const ds=require('./service/dataService')
 
+//import cors
+const cors=require("cors")
+
 //import jswt
 const jwt=require("jsonwebtoken")
 
@@ -12,6 +15,10 @@ const app=express()
 
 //to convert all data from json to js
 app.use(express.json())
+
+
+// integrate app with frontend
+app.use(cors({origin:"http://localhost:4200"}))
 
 
 
@@ -44,47 +51,74 @@ catch{
 
 //register post
 app.post("/register",(req,res)=>{
- const result=ds.register(req.body.acno,req.body.uname,req.body.psw)
-
+ ds.register(req.body.acno,req.body.uname,req.body.psw).then(result=>{
     res.status(result.statusCode).json(result)
+
+ })
+
 
 })
 
 //login
 app.post("/login",(req,res)=>{
-    const result=ds.login(req.body.acno,req.body.psw)
+    ds.login(req.body.acno,req.body.psw).then(result=>{
+        res.status(result.statusCode).json(result)
+
+    })
    
-       res.status(result.statusCode).json(result)
    
    })
 
 //deposite
 
 app.post("/deposite",jwtMiddleware,(req,res)=>{
-    const result=ds.deposite(req.body.acno,req.body.psw,req.body.amnt)
+    const result=ds.deposite(req.body.acno,req.body.psw,req.body.amnt).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
    
-       res.status(result.statusCode).json(result)
    
    })
 
 // withdraw
 
 app.post("/withdraw",jwtMiddleware,(req,res)=>{
-    const result=ds.withdraw(req.body.acno,req.body.psw,req.body.amnt)
+    ds.withdraw(req.body.acno,req.body.psw,req.body.amnt).then(result=>{
+        res.status(result.statusCode).json(result)
+
+    })
    
-       res.status(result.statusCode).json(result)
+    //    res.status(result.statusCode).json(result)
    
    })
 
 
 //gettransaction
 
-app.get("/transaction",jwtMiddleware,(req,res)=>{
-    const result=ds.getTransaction(req.body.acno)
+app.post("/transaction",jwtMiddleware,(req,res)=>{
+    ds.getTransaction(req.body.acno).then(result=>{
+        res.status(result.statusCode).json(result)
+    })
    
-       res.status(result.statusCode).json(result)
+      
    
    })
+
+
+//delete      
+                    //to store params variable  
+app.delete("/delete/:acno",jwtMiddleware,(req,res)=>{
+                //delete acc comes as a params
+    ds.deleteAcc(req.params.acno).then(result=>{
+        res.status(result.statusCode).json(result)
+
+    })
+})
+
+
+
+
+
+
 
 
 
